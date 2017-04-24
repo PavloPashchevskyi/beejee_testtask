@@ -70,9 +70,9 @@ class UserController extends Controller
                     ];
                     $inserted = false;
                 } else {
-                
+                    $nextID = $userModel->calculateNextID();
                     $inserted = $userModel->insert([
-                        'user_id' => $userModel->calculateNextID(),
+                        'user_id' => $nextID,
                         'Login' => '"'.$this->post['login'].'"',
                         'Passwd' => '"'.$hash.'"',
                         'Email' => '"'.$this->post['email'].'"'
@@ -84,6 +84,8 @@ class UserController extends Controller
                             'type' => 'success',
                             'text' => 'You are successfully registered!'
                         ];
+                        $_SESSION['loggedin_id'] = $nextID;
+                        $this->redirect('/reg_auth/user/profile/'.$_SESSION['loggedin_id']);
                     } else {
                         $messages[] = [
                             'display' => true,
