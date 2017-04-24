@@ -1,0 +1,80 @@
+{% extends "common/base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    {{ 'Tasks list' }}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/application/modules/task_manager/views/includes/css/jquery/jquery.dataTables.min.css"/>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="/application/modules/task_manager/views/includes/js/jquery/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#tasks_list_table').dataTable({
+                'pageLength': 3,
+                'lengthMenu': [3, 10, 25, 50, 100]
+            });
+        });
+    </script>
+{% endblock %}
+{% block bootstrap_row %}
+    {{ parent() }}
+    
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            {% if authorized_user.user_id == 0 %}
+              <li><a href="/reg_auth/user/register">{{ 'User register' }}</a></li>
+              <li><a href="/reg_auth/user/authorize">{{ 'User authorize' }}</a></li>
+            {% else %}
+              <li><a href="/reg_auth/user/profile/{{ authorized_user.user_id }}">{{ 'User profile' }}</a></li>
+            {% endif %}
+              <li><a class="navbar-nav" href="/task_manager/task/list">{{ 'Tasks list' }}</a></li>
+              <li><a href="/task_manager/task/add">{{ 'Add task' }}</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    <div class="panel">
+        <h2 class="panel-heading">{{ 'Tasks list' }}</h2>
+        <table class="table" id="tasks_list_table">
+            <thead>
+                <tr>
+                    {% for tasks_header_column in tasks_header %}
+                        <th>{{ tasks_header_column }}</th>
+                    {% endfor %}
+                    <th>{% if authorized_user.Login == 'admin' %}{{ 'Actions with record' }}{% endif %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        {% for column_name, column in task %}
+                                {% if column_name == 'TaskImage' %}
+                                    <td><img src="{{ column }}" alt="{{ column }}"/></td>
+                                {% else %}
+                                    <td>{{ column }}</td>
+                                {% endif %}
+                        {% endfor %}
+                        <td class="row">
+                            {% if authorized_user.Login == 'admin' %}
+                                <a class="col-sm-4" href="/task_manager/task/edit/{{ task.task_id }}">{{ 'Edit' }}</a>
+                                <a class="col-sm-4" href="/task_manager/task/delete/{{ task.task_id }}">{{ 'Delete' }}</a>
+                                {% if task.Done %}
+                                    <a class="col-sm-4" href="/task_manager/task/reopen/{{ task.task_id }}">{{ 'Reopen' }}</a>
+                                {% else %}
+                                    <a class="col-sm-4" href="/task_manager/task/execute/{{ task.task_id }}">{{ 'Execute' }}</a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <a class="col-sm-12" href="/task_manager/task/add">{{ 'Add task' }}</a>
+        </div>
+    </div>
+{% endblock %}

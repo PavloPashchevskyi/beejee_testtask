@@ -1,0 +1,41 @@
+{% extends "common/base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    {{ 'Login' }}
+{% endblock %}
+{% block bootstrap_row %}
+    {{ parent() }}
+        <div class="panel row">
+            <form action="/reg_auth/user/authorize" method="post">
+                <h2 class="panel-heading col-sm-offset-2">{{ 'Login of user:' }}</h2>
+                <div class="form-group row">
+                    <label class="col-sm-2 control-label"for="input_login">{{ 'Login:' }}</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="input_login" type="text" name="login"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 control-label" for="input_password">{{ 'Password:' }}</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="input_password" type="password" name="password"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-offset-2 col-sm-10" >
+                        <input class="btn btn-default" type="submit" name="loginpassword" value="{{ 'Login' }}">
+                    </div>
+                </div>
+            </form>
+        {% if messages is defined %}
+            {% for message in messages %}
+                <div class="alert-{{ message.type }}">
+                    <h2>{{ message.text }}</h2>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="panel row">
+        <a href="/reg_auth/user/register" class="button button-positive button-clear button-block "><span class="col-sm-offset-6 col-sm-3">{{ 'Create an account' }}</span></a>
+        <a class="col-sm-3" href="/task_manager/task/list">{{ 'To tasks list' }}</a>
+    </div>
+{% endblock %}

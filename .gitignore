@@ -1,0 +1,5 @@
+/vendor/
+/var/cache/
+/var/logs/*.log
+/application/config/options.php
+/nbproject/

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            {% block title %}
+                {{'Task manager | '}}
+            {% endblock %}
+        </title>
+            {% block stylesheets %}
+                 <!-- bootstrap styles -->
+                 <link rel="stylesheet" type="text/css" href="/application/modules/reg_auth/views/includes/css/bootstrap/bootstrap.min.css"/>
+                 <link rel="stylesheet" type="text/css" href="/application/modules/reg_auth/views/includes/css/bootstrap/bootstrap-theme.min.css"/>
+            {% endblock %}
+            {% block javascripts %}
+                <script type="text/javascript" src="/application/modules/reg_auth/views/includes/js/jquery/jquery-3.1.1.min.js"></script>
+            {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <div class="container">
+                {% block bootstrap_container %}
+                    <div class="row">
+                        {% block bootstrap_row %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </body>
+</html>

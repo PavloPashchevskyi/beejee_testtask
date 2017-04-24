@@ -1,0 +1,24 @@
+{% extends "common/base.html.twig" %}
+{% block title %}
+    {{ parent() }}
+    {{ 'Profile of '~user.Login }}
+{% endblock %}
+{% block bootstrap_row %}
+    {{ parent() }}
+    <div class="panel">
+        <h2 class="panel-heading">{{'Profile of user '~user.Login }}</h2>
+        <table class="table">
+            {% for key, value in user %}
+                {% if key != 'Passwd' %}
+                    <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <div class="row">
+            <a class="col-sm-12" href="/task_manager/task/list">{{ 'To tasks list' }}</a>
+        </div>
+        <div>
+            <a class="pull-left" href="/reg_auth/user/logout">{{'Logout'}}</a>
+        </div>
+    </div>
+{% endblock %}

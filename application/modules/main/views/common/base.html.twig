@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="/application/modules/main/views/includes/css/menu.css">
+        {% endblock %} 
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            {% block vmenu %}
+                <div class="vertical-menu">
+                    <label>Modules of application</label><br/>
+                    <a href="/main/default/index">Default module</a><br/>
+                    <a href="/task_manager/task/list">Task manager module</a><br/>
+                </div>
+            {% endblock %}
+        {% endblock %}
+    </body>
+</html>

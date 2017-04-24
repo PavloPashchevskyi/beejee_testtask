@@ -1,0 +1,21 @@
+<?php
+return [
+    'dbconnection' => [
+        'server' => 'mysql',
+        'host' => 'localhost',
+        'port' => '',
+        'user' => 'test',
+        'password' => 'password',
+        'dbname' => 'mydbname',
+        'persistent' => false,
+    ],
+    'dbtable' => [
+        'prefix' => 't',
+        'suffix' => 's',
+    ],
+    'default_route' => [
+        'module' => 'main',
+        'controller' => 'default',
+        'action' => 'index',
+    ],
+];
